@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@500&family=Bruno+Ace+SC&family=Montserrat:wght@500&family=Open+Sans&family=Poppins&family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+  </head>
+  <body>
+    <form action="/" method="post" autocomplete="off">
+      <div class="class">
+        <img
+          src="https://as2.ftcdn.net/v2/jpg/00/36/05/61/1000_F_36056164_jt2Y7gUU32F5aqdeo8b9FkmT4jwVQ3M0.jpg"
+          alt=""
+          class="img1"
+        />
+        <h1 class="h1">VISVAS Attendance Form</h1>
+        <img
+          src="https://www.visvasvsn.org/assets/img/logo.png"
+          alt="image"
+          srcset=""
+        />
+      </div>
+      <div class="center">
+        <h2 class="h2">Coordinator Details</h2>
+        <div class="wrap1">
+          <div class="cont1 cont2">
+            <div class="hj">
+              <label for="">Mobile Number</label>
+              <div>
+                <input
+                  name="mobile"
+                  class="select input"
+                  placeholder="Select your mobile number.."
+                  value=""
+                  id="search"
+                  oninput="getFiltered(this)"
+                  type="number"
+                  pattern="[0-9]{10}"
+                />
+
+                <div class="div" id="div">
+                  <div id="mobileDiv">
+                    <% for (let index = 0; index < mobile_data.length; index++)
+                    { %> <% if(mobile_data[index].COORDINATOR_MOBILE_NUMBER!==
+                    null ){ %>
+                    <h5
+                      value="<%= mobile_data[index].COORDINATOR_MOBILE_NUMBER %>"
+                      class="h5"
+                    >
+                      <%= mobile_data[index].COORDINATOR_MOBILE_NUMBER %>
+                    </h5>
+                    <% } %> <% } %>
+                  </div>
+                </div>
+                <% if(typeof errors.mobile !== 'undefined'){ %>
+                <div class="spanning">
+                  <span id="ms"><%= errors.mobile.msg %> </span>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="cont1">
+              <label for="">Email Address </label>
+              <input
+                type="text"
+                placeholder="Auto Populated..."
+                disabled
+                name="email"
+                id="email"
+              />
+            </div>
+            <div class="cont1">
+              <label for="">Full Name </label>
+              <input
+                type="text"
+                placeholder="Auto Populated..."
+                disabled
+                name="name"
+                id="name"
+              />
+            </div>
+          </div>
+        </div>
+        <h2 class="h2 h9">Chanting Details</h2>
+        <div class="wrap2 wrap3">
+          <div class="flex-column1">
+            <label>Chanting Type </label>
+            <select name="chanting_type" id="chanting_type">
+              <% for (let index = 0; index < select_data.length; index++) { %>
+              <% if( select_data[index].chanting_name!==null) {%>
+              <option value="<%= index+1 %>">
+                <%= select_data[index].chanting_name %>
+              </option>
+              <% } %> <% } %>
+            </select>
+          </div>
+          <div class="flex-column">
+            <label>Chanting Sub Type</label>
+            <select name="chanting_sub_type" id="chanting_subtype">
+              <option value="0">None</option>
+            </select>
+          </div>
+        </div>
+        <div class="wrap2 wrap4">
+          <div class="flex-column1">
+            <label>Chanting Batch </label>
+            <select name="chanting_batch" id="chanting_batch">
+              <% for (let index = 0; index < batch_opt.length; index++) {%>
+              <option value="<%= index+1 %>">
+                <%= batch_opt[index].BATCH_NAME %>
+              </option>
+              <%} %>
+            </select>
+          </div>
+          <div class="flex-column">
+            <label>Chanting Sub Batch </label>
+            <div>
+              <input
+                type="number"
+                name="chanting_sub_batch"
+                id="chanting_sub_batch"
+                class="input"
+              />
+              <% if(typeof errors.chanting_sub_batch !== 'undefined'){ %>
+              <div class="spanning">
+                <span id="csbs"><%= errors.chanting_sub_batch.msg %> </span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="wrap2 wrap5">
+          <div class="flexy1">
+            <label>Participants Count </label>
+            <div>
+              <input
+                type="number"
+                name="participants_count"
+                id="participants_count"
+                class="input"
+              />
+              <% if(typeof errors.participants_count !== 'undefined'){ %>
+              <div class="spanning">
+                <span id="pcs"><%= errors.participants_count.msg %> </span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexy1">
+            <label>Kids Count </label>
+            <div>
+              <input
+                type="number"
+                class="kid-input input"
+                name="kids_count"
+                id="kids_count"
+              />
+              <% if(typeof errors.kids_count !== 'undefined'){ %>
+              <div class="spanning">
+                <span id="kcs"><%= errors.kids_count.msg %> </span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexy1">
+            <label>Avanthi's Chanted </label>
+            <div>
+              <input
+                type="number"
+                name="avanthi_chanted"
+                id="a_count"
+                class="input"
+              />
+              <% if(typeof errors.avanthi_chanted !== 'undefined'){ %>
+              <div class="spanning">
+                <span id="acs"><%= errors.avanthi_chanted.msg %> </span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="wrap6">
+          <div class="wrapy1">
+            <label for="">Special Notes</label>
+            <textarea
+              name="text"
+              id="special_notes"
+              cols="60"
+              rows="8"
+              name="textarea"
+            ></textarea>
+          </div>
+
+          <div class="wrapy1 input1">
+            <label for="">Chanting Date </label>
+            <div>
+              <input type="datetime-local" name="chanting_date" id="date" />
+              <% if(typeof errors.chanting_date !== 'undefined'){ %>
+              <div class="spanning">
+                <span id="cds"><%= errors.chanting_date.msg %> </span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="input2 wrapy1">
+            <label for="">Google Link </label>
+            <div>
+              <input
+                type="text"
+                class="input"
+                name="google_link"
+                id="url"
+                placeholder="Meeting Link..."
+              />
+              <% if(typeof errors.google_link !== 'undefined'){ %>
+              <div class="spanning">
+                <span id="gls"><%= errors.google_link.msg %> </span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="loc">
+          <label>Location</label>
+          <div>
+            <input
+              type="text"
+              placeholder="Location..."
+              name="location"
+              id="location"
+              class="input"
+            />
+            <% if(typeof errors.location !== 'undefined'){ %>
+            <div class="spanning">
+              <span id="ls"><%= errors.location.msg %> </span>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <div class="button">
+          <button id="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      function _(element) {
+        return document.getElementById(element);
+      }
+
+      const h5 = [...document.querySelectorAll(".h5")];
+      auto_populate(h5);
+      const numbers = [];
+      h5.forEach((el) => numbers.push(el.getAttribute("value")));
+
+      function getFiltered(e) {
+        _("search").setAttribute("value", e.value);
+        let number = e.value;
+        let textvalue = _("search").value;
+        let arr = [];
+        //limiting upto 10digits
+        if (e.value.length > Number(e.max)) {
+          e.value = e.value.slice(0, 10);
+        }
+
+        //Filtering based on input
+        arr = numbers.filter((el) => {
+          return el.startsWith(textvalue);
+        });
+        if (arr.length) {
+          arr = arr
+            .map((data) => `<h5 class='h6' value='${data}'>${data}</h5>`)
+            .join("");
+        } else {
+          arr = "<h5 class='notAllowed'>No data found</h5>";
+        }
+        _("mobileDiv").innerHTML = `${arr}`;
+        const h6 = document.querySelectorAll(".h6");
+        auto_populate(h6);
+
+        _("ms").innerHTML = "";
+        if (!numbers.includes(e.value)) {
+          _("email").setAttribute("placeholder", "");
+          _("name").setAttribute("placeholder", "");
+        }
+
+        //auto populating on pressing enter
+        _("search").addEventListener("keyup", async (event) => {
+          if (event.key === "Enter") {
+            const response = await fetch(
+              `/get_data_mobile?parent_value=${event.target.value}`
+            );
+            const data = await response.json();
+            _(
+              "name"
+            ).placeholder = `${data[0].coordinator_second_name} ${data[0].coordinator_first_name} `;
+            _("name").style.background = "#98D8AA";
+            _("email").placeholder = `${data[0].coordinator_email_address}`;
+            _("email").style.background = "#98D8AA";
+            _("div").classList.remove("show");
+          }
+        });
+      }
+
+      //autopopulate from selecting from dropdown
+      function auto_populate(h5) {
+        h5.forEach((el) => {
+          el.addEventListener("click", async (e) => {
+            _("search").value = e.target.innerHTML.trim();
+            _("div").classList.remove("show");
+            const response = await fetch(
+              `/get_data_mobile?parent_value=${e.target.innerHTML.trim()}`
+            );
+            const data = await response.json();
+            _(
+              "name"
+            ).placeholder = `${data[0].coordinator_second_name} ${data[0].coordinator_first_name} `;
+            _("name").style.background = "#98D8AA";
+            _("email").placeholder = `${data[0].coordinator_email_address}`;
+            _("email").style.background = "#98D8AA";
+          });
+        });
+      }
+
+      _("search").onclick = () => {
+        _("div").classList.toggle("show");
+      };
+
+      //getting chanting_sub_type dropdown from db
+      _("chanting_type").onchange = async (e) => {
+        const child_value = _("chanting_subtype");
+        const response = await fetch(
+          `/get_data_options?parent_value=${e.target.value}`
+        );
+        const data = await response.json();
+        var html = "";
+        if (data.data.length !== 0) {
+          let index = 0;
+          data.data.forEach((element) => {
+            html += `<option value=${++index}>${
+              element.chanting_sub_name
+            }</option>`;
+          });
+        } else {
+          html = "<option value='none'>None</option>";
+        }
+        child_value.innerHTML = html;
+      };
+
+      //Removing span errors
+      function removerError(name, classList) {
+        name.oninput = () => {
+          classList.innerHTML = "";
+        };
+      }
+      removerError(_("participants_count"), _("pcs"));
+      removerError(_("a_count"), _("acs"));
+      removerError(_("kids_count"), _("kcs"));
+      removerError(_("url"), _("gls"));
+      removerError(_("location"), _("ls"));
+
+      _("date").onchange = (e) => {
+        _("date").setAttribute("value", e.target.value);
+        _("cds").innerHTML = "";
+      };
+
+      // prevent form submit on enter
+      const input = [...document.getElementsByClassName("input")];
+      input.map((el) => {
+        el.addEventListener("keypress", (e) => {
+          var keyCode = e.keyCode || e.which;
+          if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
