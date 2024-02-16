@@ -1,6 +1,6 @@
 Project Name: Visvas Attendence Form
 
-You can visit https://github.com/nithin521/RegisterForm2 to download all files 
+You can visithttps://github.com/Saipuneethreddy26/Attendance-Tracking-System to download all files 
 
 In the views folder we have ejs file (The html of the project and inline js)
 
